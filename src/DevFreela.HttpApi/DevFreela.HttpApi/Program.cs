@@ -1,13 +1,18 @@
+using DevFreela.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DevFreela.HttpApi
 {
     public class Program
-    {
+    { 
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<DevFreelaDbContext>(
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

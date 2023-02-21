@@ -2,6 +2,6 @@
 
 public enum UserRole
 {
-    Developer,
+    Freelancer,
     Client
 }
