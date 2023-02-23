@@ -49,7 +49,7 @@ public class ProjectsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
     {
-        if (id == int.Empty || command.Description.Length > 255)
+        if (id == 0 || command.Description.Length > 255)
         {
             return BadRequest();
         }
