@@ -3,6 +3,8 @@ Essa é a minha versão do **DevFreela**, aplicação criada durante o curso **M
 Este projeto foi criado com o objetivo de aplicar boas práticas de desenvolvimento .NET 7 para fins de estudos.
 Nesse projeto serão utilizados as seguintes técnicas/ferramentas:
 - [ ] Arquitetura Limpa
+- [ ] Domínio Rico
+- [ ] SOLID
 - [ ] CQRS
 - [ ] Fluent API
 - [ ] Entity Framework

@@ -24,7 +24,7 @@ namespace DevFreela.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DevFreela.Domain.Projects.Entities.Project", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -37,10 +37,10 @@ namespace DevFreela.Infrastructure.Data.Migrations
                     b.Property<DateTime>("FinishedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdClient")
+                    b.Property<int>("IdClient")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdFreelancer")
+                    b.Property<int>("IdFreelancer")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartedAt")
@@ -69,7 +69,7 @@ namespace DevFreela.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DevFreela.Domain.Skills.Skill", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -82,7 +82,7 @@ namespace DevFreela.Infrastructure.Data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -94,26 +94,26 @@ namespace DevFreela.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DevFreela.Domain.Skills.UserSkill", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdSkill")
+                    b.Property<int>("IdSkill")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdUser")
+                    b.Property<int>("IdUser")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SkillId")
+                    b.Property<int?>("SkillId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -127,7 +127,7 @@ namespace DevFreela.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("DevFreela.Domain.Users.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 

@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DevFreela.Application.Projects.Command;
+using DevFreela.Application.Projects.Commands;
+using DevFreela.Application.Projects.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols;
 
 namespace DevFreela.HttpApi.Controllers;
 
@@ -7,10 +12,20 @@ namespace DevFreela.HttpApi.Controllers;
 [ApiController]
 public class ProjectsController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get()
+    private readonly IMediator _mediator;
+
+    public ProjectsController(IMediator mediator)
     {
-        return Ok("Hello World");
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get(string query)
+    {
+        var getAllProjectsQuery = new GetAllProjectsQuery(query);
+        var projects = await _mediator.Send(getAllProjectsQuery);
+
+        return Ok(projects);
     }
 
     [HttpGet("{id}")]
@@ -20,21 +35,38 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] string name)
+    public async Task<IActionResult> Post([FromBody] CreateProjectCommand command)
     {
-        return Ok($"Hello World {name}");
+        if (command.Title.Length > 50)
+        {
+            return BadRequest("Title must be less than 50 characters");
+        }
+
+        var id = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetById), new { id }, command);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id)
+    public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
     {
-        return Ok($"Hello World {id}");
+        if (id == int.Empty || command.Description.Length > 255)
+        {
+            return BadRequest();
+        }
+
+        await _mediator.Send(command);
+
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        return Ok($"Hello World {id}");
+        var command = new DeleteProjectCommand(id);
+
+        await _mediator.Send(command);
+
+        return NoContent();
     }
 
     [HttpPut("{id}/start")]
